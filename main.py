@@ -34,7 +34,7 @@ import csv
 
 # ---- Start Add New Customer ----
 class Customer:
-    def __init__(self, account_id, first_name, last_name, password, balance_checking, balance_savings):
+    def __init__(self, account_id, first_name, last_name, password, balance_checking = 0.0, balance_savings = 0.0):
         self.account_id = account_id
         self.first_name = first_name
         self.last_name = last_name
@@ -51,8 +51,8 @@ class Customer:
         print(f"Balance savings: {self.balance_savings}")
 
 
-def create_new_customer():
-    account_id = input("Enter your accound id: ")
+def create_new_customer(account_id):
+    #account_id = input("Enter your accound ID: ")
     first_name = input("Enter your first name: ")
     last_name = input("Ener your last name: ")
     password = input("Enter your password: ")
@@ -65,6 +65,7 @@ def write_to_csv(customer):
         writer = csv.writer(csvfile)    
         writer.writerow([customer.account_id, customer.first_name, customer.last_name, customer.password, customer.balance_checking, customer.balance_savings])  
 
-customer1 = create_new_customer()
-write_to_csv(customer1)
+for account_id in range(1, 1001):
+    customer1 = create_new_customer(account_id)
+    write_to_csv(customer1)
 # ---- End Add New Customer ----
