@@ -33,6 +33,7 @@ import csv
 #  End Wite Data from "data.csv" file to bank.csv
 
 # ---- Start Add New Customer ----
+
 class Customer:
     def __init__(self, account_id, first_name, last_name, password, balance_checking = 0.0, balance_savings = 0.0):
         self.account_id = account_id
@@ -54,7 +55,7 @@ class Customer:
 def create_new_customer():
     account_id = input("Enter your accound ID: ")
     first_name = input("Enter your first name: ")
-    last_name = input("Ener your last name: ")
+    last_name = input("Enter your last name: ")
     password = input("Enter your password: ")
     balance_checking = float(input("Enter your balance checking: "))
     balance_savings = float(input("Enter your balance savings: "))
@@ -74,30 +75,27 @@ def check_customer_exists(account_id):
                             return True
                 return False
 
-# To return main page to choose option
-print("\nWelcome to ACME Bank \n")
 
-while True:
-    print("\n Choose an action: \n")
-    print("1. Add new Customer")
-    print("2. Login")
+if __name__ == '__main__':
+    # To return main page to choose option
+    print("\nWelcome to ACME Bank \n")
 
-    choice = input("\nEnter your choice:")
-    
-    if choice == '1':
-        new_customer = create_new_customer()
-        write_to_csv(new_customer)
-        print("\nCustomer added successfully!")
-    elif choice == '2':
-        account_id = input("Enter your accound ID: ")
+    while True:
+        print("\n Choose an action: \n")
+        print("1. Add new Customer")
+        print("2. Login")
 
-        if check_customer_exists(account_id):
-            print('The Customer aleread exists.')
-        else:
-            print("The customer not exists, please click option '1' to register")
+        choice = input("\nEnter your choice:")
+        
+        if choice == '1':
+            new_customer = create_new_customer()
+            write_to_csv(new_customer)
+            print("\nCustomer added successfully!")
+        elif choice == '2':
+            account_id = input("Enter your accound ID: ")
 
-
-# # ---- End Add New Customer ----
-
-
-
+            if check_customer_exists(account_id):
+                print('The Customer aleread exists.')
+            else:
+                print("The customer not exists, please click option '1' to register")
+# ---- End Add New Customer ----
