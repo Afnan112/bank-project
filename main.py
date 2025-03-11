@@ -66,6 +66,14 @@ def write_to_csv(customer):
         writer = csv.writer(csvfile)    
         writer.writerow([customer.account_id, customer.first_name, customer.last_name, customer.password, customer.balance_checking, customer.balance_savings])  
 
+def check_customer_exists(account_id):
+                with open('bank.csv', 'r') as csvfile:
+                    reader = csv.reader(csvfile)
+                    for row in reader:
+                        if row and row[0] == str(account_id):
+                            return True
+                return False
+
 # To return main page to choose option
 while True:
     print("Welcome to ACME Bank \n")
@@ -73,12 +81,20 @@ while True:
     print("1. Add new Customer")
     print("2. Login")
 
-    choice = input("\nEnter your choice:\n ")
+    choice = input("\nEnter your choice:")
     
     if choice == '1':
         new_customer = create_new_customer()
         write_to_csv(new_customer)
         print("Customer added successfully!")
+    elif choice == '2':
+        account_id = input("Enter your accound ID: ")
+
+        if check_customer_exists(account_id):
+            print('The Customer aleread exists.')
+        else:
+            print("The customer not exists ")
+
 
 # # ---- End Add New Customer ----
 
