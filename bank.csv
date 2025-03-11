@@ -1,5 +1,4 @@
-10011,Noor,Ali,noor452_al@,0,0
-assword,balance_checking,balance_savings
+account_id,frst_name,last_name,password,balance_checking,balance_savings
 
 10001,suresh,sigera,juagw362,1000,10000
 
@@ -12,5 +11,6 @@ assword,balance_checking,balance_savings
 10005,jake,paul,d^dg23g)@,100000,100000
 
 
-1,Afnan,Matari,afnan234@M,0,0
-2,Aleen,Matari,aleen432_M,0,0
+10006,Sarah,Ahmed,sarah567@A,0.0,0.0
+10007,Afnan,Hassan,afnan6789@,0.0,0.0
+10008,Aleen,Hassan,aleen456@,0.0,0.0

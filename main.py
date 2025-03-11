@@ -30,7 +30,7 @@ import csv
 #     csvwriter.writerow(fields)
 #     # writing the data rows  
 #     csvwriter.writerows(rows) 
-# #  End Wite Data from "data.csv" file to bank.csv
+#  End Wite Data from "data.csv" file to bank.csv
 
 # ---- Start Add New Customer ----
 class Customer:
@@ -41,7 +41,7 @@ class Customer:
         self.password = password
         self.balance_checking = balance_checking
         self.balance_savings = balance_savings
-
+    
     def display_customer(self):
         print(f"Account ID: {self.account_id}")
         print(f"First name: {self.first_name}")
@@ -51,21 +51,36 @@ class Customer:
         print(f"Balance savings: {self.balance_savings}")
 
 
-def create_new_customer(account_id):
-    #account_id = input("Enter your accound ID: ")
+def create_new_customer():
+    account_id = input("Enter your accound ID: ")
     first_name = input("Enter your first name: ")
     last_name = input("Ener your last name: ")
     password = input("Enter your password: ")
-    balance_checking = input("Enter your balance checking: ")
-    balance_savings = input("Enter your balance savings: ")
+    balance_checking = float(input("Enter your balance checking: "))
+    balance_savings = float(input("Enter your balance savings: "))
     
     return Customer(account_id, first_name, last_name, password, balance_checking, balance_savings)
+
 def write_to_csv(customer):
     with open('bank.csv', 'a', newline='') as csvfile:  
         writer = csv.writer(csvfile)    
         writer.writerow([customer.account_id, customer.first_name, customer.last_name, customer.password, customer.balance_checking, customer.balance_savings])  
 
-for account_id in range(1, 1001):
-    customer1 = create_new_customer(account_id)
-    write_to_csv(customer1)
-# ---- End Add New Customer ----
+# To return main page to choose option
+while True:
+    print("Welcome to ACME Bank \n")
+    print("\n Choose an action: \n")
+    print("1. Add new Customer")
+    print("2. Login")
+
+    choice = input("\nEnter your choice:\n ")
+    
+    if choice == '1':
+        new_customer = create_new_customer()
+        write_to_csv(new_customer)
+        print("Customer added successfully!")
+
+# # ---- End Add New Customer ----
+
+
+
