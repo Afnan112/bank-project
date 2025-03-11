@@ -75,8 +75,9 @@ def check_customer_exists(account_id):
                 return False
 
 # To return main page to choose option
+print("\nWelcome to ACME Bank \n")
+
 while True:
-    print("Welcome to ACME Bank \n")
     print("\n Choose an action: \n")
     print("1. Add new Customer")
     print("2. Login")
@@ -86,14 +87,14 @@ while True:
     if choice == '1':
         new_customer = create_new_customer()
         write_to_csv(new_customer)
-        print("Customer added successfully!")
+        print("\nCustomer added successfully!")
     elif choice == '2':
         account_id = input("Enter your accound ID: ")
 
         if check_customer_exists(account_id):
             print('The Customer aleread exists.')
         else:
-            print("The customer not exists ")
+            print("The customer not exists, please click option '1' to register")
 
 
 # # ---- End Add New Customer ----
