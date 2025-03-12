@@ -69,11 +69,11 @@ def write_to_csv(customer):
         writer = csv.writer(csvfile)    
         writer.writerow([customer.account_id, customer.first_name, customer.last_name, customer.password, customer.balance_checking, customer.balance_savings])  
 
-def check_customer_exists(account_id):
+def check_customer_exists(account_id, password):
                 with open('bank.csv', 'r') as csvfile:
                     reader = csv.reader(csvfile)
                     for row in reader:
-                        if row and row[0] == str(account_id):
+                        if row and row[0] == str(account_id) and row[3] == str(password):
                             return True
                 return False
 
@@ -93,13 +93,15 @@ while True:
             account_id = input("Enter your accound ID: ")
             password = input("Enter your password: ")
 
-            if check_customer_exists(account_id):
+            if check_customer_exists(account_id, password):
                 print('\nThe Customer aleread exists.')
                 print("You may proceed with the transactions")
+            else:
+                print("The customer not exists, please click option '1' to register")
+                continue
+            choice = input("choose: Deposit, Withdraw: ").lower()
 
-                choice = input("choose: Deposit, Withdraw ")
-
-                if choice == "Deposit":
+            if choice == "deposit":
                     print("\nChoose the type of account:")
                     print("1. checking account")
                     print("2. savings account")
@@ -127,5 +129,5 @@ while True:
                                         writer = csv.writer(csvfile)
                                         writer.writerows(rows)
                                 print(f"Deposited {deposit_amount} into checking account. New balance: {row[4]}")
-
+        
 # ---- End Add New Customer ----
