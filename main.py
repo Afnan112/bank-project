@@ -77,12 +77,33 @@ def check_customer_exists(account_id, password):
                             return True
                 return False
 
+def deposit_to_accounts(account_id, deposit_amount, account_type):
+    rows = []
+    with open('bank.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        # read all rows and store in row
+        for row in reader:
+            # check from the row is not empty 
+            if row: 
+                if row[0] == account_id:
+                    if account_type == 'checking':
+                        # balance_checking => [4]
+                        row[4] = float(row[4]) + deposit_amount
+                    elif account_type == 'savings':
+                        row[5] = float(row[5]) + deposit_amount
+            rows.append(row)
+                                        
+    with open('bank.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(rows) 
+    return row
+print("\nWelcome to ACME Bank 💰")
 while True:
-        print("\n Choose an action: \n")
+        print("\n Choose an action:")
         print("1. Add new Customer")
         print("2. Login")
 
-        choice = input("\nEnter your choice:")
+        choice = input("\nEnter your choice:").strip()
         
         if choice == '1':
             new_customer = create_new_customer('ccount_id', 'first_name', 'last_name','password')
@@ -90,44 +111,32 @@ while True:
             print("\nCustomer added successfully!\n")
 
         elif choice == '2':
-            account_id = input("Enter your accound ID: ")
-            password = input("Enter your password: ")
+            account_id = input("Enter your accound ID: ").strip()
+            password = input("Enter your password: ").strip()
 
             if check_customer_exists(account_id, password):
-                print('\nThe Customer aleread exists.')
-                print("You may proceed with the transactions")
+                print('\nThe Customer aleread exists, you may proceed with the transactions\n')
             else:
-                print("The customer not exists, please click option '1' to register")
+                print("\nThe customer not exists, please click option '1' to register")
                 continue
             choice = input("choose: Deposit, Withdraw: ").lower()
 
             if choice == "deposit":
-                    print("\nChoose the type of account:")
+                    print("\n Choose the type of account:")
                     print("1. checking account")
                     print("2. savings account")
-                    print("3. both a checking and a savings account")
+                    #print("3. both a checking and a savings account")
 
                     account_choice = input("\nEnter your choice: ")
                     
                     if account_choice == '1':
                                 print("You selected a checking account.")
                                 deposit_amount = float(input("\nEnter the deposit amount: "))
-                                # Adding a list to store all rows in the bank file 
-                                rows = []
-                                with open('bank.csv', 'r') as csvfile:
-                                    reader = csv.reader(csvfile)
-                                    # read all rows and store in row
-                                    for row in reader:
-                                        # check from the row is not empty 
-                                        if row: 
-                                            if row[0] == account_id:
-                                                # balance_checking => [4]
-                                                row[4] = float(row[4]) + deposit_amount
-                                        rows.append(row)
-                                
-                                with open('bank.csv', 'w', newline='') as csvfile:
-                                        writer = csv.writer(csvfile)
-                                        writer.writerows(rows)
-                                print(f"Deposited {deposit_amount} into checking account. New balance: {row[4]}")
-        
+                                updated_row = deposit_to_accounts(account_id, deposit_amount,'checking')
+                                print(f"Deposited {deposit_amount} into checking account.")
+                    elif account_choice == '2':
+                        print("You selected a savings account.")
+                        deposit_amount = float(input("\nEnter the deposit amount: "))
+                        updated_row = deposit_to_accounts(account_id, deposit_amount,'savings')
+                        print(f"Deposited {deposit_amount} into checking account.")
 # ---- End Add New Customer ----
