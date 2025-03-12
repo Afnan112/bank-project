@@ -154,6 +154,7 @@ def transfer_between_accounts(account_id, transfer_amount, from_account, to_acco
         writer = csv.writer(csvfile)
         writer.writerows(rows)
 # ---- End transfer Money function  -----
+
 print("\nWelcome to ACME Bank 💰")
 while True:
         print("\n Choose an action:")
@@ -189,13 +190,13 @@ while True:
                     if account_choice == '1':
                                 print("You selected a checking account.")
                                 deposit_amount = float(input("\nEnter the deposit amount: "))
-                                updated_row = deposit_to_accounts(account_id, deposit_amount,'checking')
-                                print(f"Deposited {deposit_amount} into checking account.")
+                                updated_checking = deposit_to_accounts(account_id, deposit_amount,'checking')
+                                print(f"Deposited {deposit_amount} into checking account. New balance: {updated_checking[4]}")
                     elif account_choice == '2':
                         print("You selected a savings account.")
                         deposit_amount = float(input("\nEnter the deposit amount: "))
-                        updated_row = deposit_to_accounts(account_id, deposit_amount,'savings')
-                        print(f"Deposited {deposit_amount} into checking account.")
+                        updated_savings = deposit_to_accounts(account_id, deposit_amount,'savings')
+                        print(f"Deposited {deposit_amount} into checking account. New balance: {updated_savings[5]}")
 
             elif choice == "withdraw":
                     print("\n Choose the type of account:")
@@ -207,13 +208,13 @@ while True:
                     if account_choice == '1':
                                 print("You selected a checking account.")
                                 withdraw_amount = float(input("\nEnter the withdraw amount: "))
-                                updated_row = withdraw_from_accounts(account_id, withdraw_amount,'checking')
-                                print(f"Withdraw {withdraw_amount} into checking account.")
+                                updated_checking = withdraw_from_accounts(account_id, withdraw_amount,'checking')
+                                print(f"Withdraw {withdraw_amount} into checking account. New balance: {updated_checking[4]}")
                     elif account_choice == '2':
                         print("You selected a savings account.")
                         withdraw_amount = float(input("\nEnter the deposit amount: "))
-                        updated_row = withdraw_from_accounts(account_id, withdraw_amount,'savings')
-                        print(f"Withdraw {withdraw_amount} into savings account.")    
+                        updated_savings = withdraw_from_accounts(account_id, withdraw_amount,'savings')
+                        print(f"Withdraw {withdraw_amount} into savings account. New balance: {updated_savings[5]}")    
             elif choice == "transfer":
                 print("\n Choose the type of account to transfer from:")
                 print("1. checking account")
