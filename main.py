@@ -50,7 +50,7 @@ class Customer:
         print(f"Balance checking: {self.balance_checking}")
         print(f"Balance savings: {self.balance_savings}")
 
-
+# ---- Start Add New Customer ----
 def create_new_customer(account_id, first_name, last_name, password):
     account_id = input("Enter your accound ID: ")
     first_name = input("Enter your first name: ")
@@ -76,7 +76,8 @@ def check_customer_exists(account_id, password):
                         if row and row[0] == str(account_id) and row[3] == str(password):
                             return True
                 return False
-
+# ---- End Add New Customer ----
+# ---- Start Deposit Money for checking and savings -----
 def deposit_to_accounts(account_id, deposit_amount, account_type):
     rows = []
     with open('bank.csv', 'r') as csvfile:
@@ -97,6 +98,33 @@ def deposit_to_accounts(account_id, deposit_amount, account_type):
         writer = csv.writer(csvfile)
         writer.writerows(rows) 
     return row
+
+# ---- Start Withdraw Money for checking and savings -----
+def withdraw_from_accounts(account_id, withdraw_amount, account_type):
+    rows = []
+    with open('bank.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            if row: 
+                if row[0] == account_id:
+                    if account_type == 'checking':
+                        if float(row[4]) >= withdraw_amount:
+                            row[4] = float(row[4]) - withdraw_amount
+                        else:
+                            print("Insufficient balance in checking account")
+                            #return None
+                    
+                    updated_row = row
+                rows.append(row)
+            else:
+                rows.append(row)
+                                        
+    with open('bank.csv', 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerows(rows) 
+    return updated_row 
+# ---- End Withdraw Money for checking and savings -----
+
 print("\nWelcome to ACME Bank 💰")
 while True:
         print("\n Choose an action:")
@@ -139,4 +167,25 @@ while True:
                         deposit_amount = float(input("\nEnter the deposit amount: "))
                         updated_row = deposit_to_accounts(account_id, deposit_amount,'savings')
                         print(f"Deposited {deposit_amount} into checking account.")
-# ---- End Add New Customer ----
+
+            elif choice == "withdraw":
+                    print("\n Choose the type of account:")
+                    print("1. checking account")
+                    print("2. savings account")
+
+                    account_choice = input("\nEnter your choice: ")
+                    
+                    if account_choice == '1':
+                                print("You selected a checking account.")
+                                withdraw_amount = float(input("\nEnter the withdraw amount: "))
+                                updated_row = withdraw_from_accounts(account_id, withdraw_amount,'checking')
+                                print(f"Withdraw {withdraw_amount} into checking account.")
+                    elif account_choice == '2':
+                        print("You selected a savings account.")
+                        withdraw_amount = float(input("\nEnter the deposit amount: "))
+                        updated_row = withdraw_from_accounts(account_id, withdraw_amount,'savings')
+                        print(f"Withdraw {withdraw_amount} into checking account.")
+
+# ---- Start Deposit Money for checking and savings -----
+    
+
