@@ -1,38 +1,4 @@
-# ---- Start Read Data from "data.csv" file ----
 import csv  
-    
-# # opening the CSV file  
-# with open('data.csv', mode ='r')as file:  
-# # reading the CSV file  
-#     csvFile = csv.reader(file)  
-    
-#     # displaying the contents of the CSV file  
-#     for lines in csvFile:  
-#         print(lines)  
-# # ---- End Read Data from "data.csv" file ----
-
-# # ---- Start Wite Data from "data.csv" file to bank.csv ----
-# # Python program to demonstrate 
-# # writing to CSV 
-# fields = ['account_id', 'frst_name', 'last_name', 'password', 'balance_checking', 'balance_savings']    
-# # data rows of csv file  
-# rows = [ ['10001', 'suresh', 'sigera', 'juagw362', '1000', '10000'],  
-#         ['10002', 'james', 'taylor', 'idh36%@#FGd', '10000', '10000'],  
-#         ['10003', 'melvin', 'gordon', 'uYWE732g4ga1', '2000', '20000' ],  
-#         ['10004', 'stacey', 'abrams', 'DEU8_qw3y72$', '2000', '20000'],  
-#         ['10005', 'jake', 'paul', 'd^dg23g)@', '100000', '100000']]    
-
-# filename = "bank.csv" 
-# # writing to csv file  
-# with open(filename, 'w') as csvfile:  
-#     # creating a csv writer object  
-#     csvwriter = csv.writer(csvfile)    
-#     csvwriter.writerow(fields)
-#     # writing the data rows  
-#     csvwriter.writerows(rows) 
-#  End Wite Data from "data.csv" file to bank.csv
-
-# ---- Start Add New Customer ----
 class Customer:
     def __init__(self, account_id, first_name, last_name, password, balance_checking=0.0, balance_savings=0.0):
         self.account_id = account_id
@@ -41,6 +7,9 @@ class Customer:
         self.password = password
         self.balance_checking = balance_checking
         self.balance_savings = balance_savings
+        self.overdraft_count = 0
+        self.overdraft_fee = 53
+        self.active = True
     
     def display_customer(self):
         print(f"Account ID: {self.account_id}")
@@ -50,14 +19,20 @@ class Customer:
         print(f"Balance checking: {self.balance_checking}")
         print(f"Balance savings: {self.balance_savings}")
 
+def overdraft_fee(self):
+        # track the number of withdrals
+        self.overdraft_count += 1
+        if self.overdraft_count >= 2:
+            self.active = False  
+            # discount fee from balance_checking
+        self.balance_checking -= self.overdraft_fee  
+
 # ---- Start Add New Customer ----
 def create_new_customer(account_id, first_name, last_name, password):
     account_id = input("Enter your accound ID: ")
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
     password = input("Enter your password: ")
-    # balance_checking = float(input("Enter your balance checking: "))
-    # balance_savings = float(input("Enter your balance savings: "))
     
     balance_checking = 0.0
     balance_savings = 0.0
