@@ -29,15 +29,26 @@ def overdraft_fee(self):
 
 # ---- Start Add New Customer ----
 def create_new_customer(account_id, first_name, last_name, password):
+        return {
+            "account_id" : account_id,
+            "first_name": first_name,
+            "last_name": last_name,
+            "password": password
+        }
+if __name__ == "__main__":
     account_id = input("Enter your accound ID: ")
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
     password = input("Enter your password: ")
 
+    customer = create_new_customer(account_id, first_name, last_name, password)
+    print(Customer)
+
+
     balance_checking = 0.0
     balance_savings = 0.0
 
-    return Customer(account_id, first_name, last_name, password, balance_checking, balance_savings)
+    # return Customer(account_id, first_name, last_name, password, balance_checking, balance_savings)
 
 def write_to_csv(customer):
     with open('bank.csv', 'a', newline='') as csvfile:  
@@ -215,4 +226,3 @@ while True:
 
                 transfer_between_accounts(account_id, transfer_amount, from_account, to_account)
                 print(f"Transferred {transfer_amount} from {from_account} to {to_account}.")
-
