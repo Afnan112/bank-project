@@ -18,7 +18,7 @@ class Customer:
         print(f"Password: {self.password}")
         print(f"Balance checking: {self.balance_checking}")
         print(f"Balance savings: {self.balance_savings}")
-
+# Not completed
 def overdraft_fee(self):
         # track the number of withdrals
         self.overdraft_count += 1
@@ -33,7 +33,7 @@ def create_new_customer(account_id, first_name, last_name, password):
     first_name = input("Enter your first name: ")
     last_name = input("Enter your last name: ")
     password = input("Enter your password: ")
-    
+
     balance_checking = 0.0
     balance_savings = 0.0
 
