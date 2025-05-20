@@ -1,17 +1,16 @@
-# bank-project
+# 🏦 Bank Project
 
 The project aims to create a simple customer management system, where customer information can be added, their presence in the system verified, and then some calculations such as withdrawal, deposit, and transfer can be performed.
 
-# Requirements
+## ✅ Functionalities Implemented
 
-1. classes;
-2. file bank.csv
-3. Classes base on the OOP design
-4. test-driven development (TDD) approach
+1. **Add New Customer** – Create a customer with checking and/or savings account.
+2. **Withdraw Money** *(Login Required)* – Withdraw funds from checking or savings.
+3. **Deposit Money** *(Login Required)* – Deposit funds into checking or savings.
+4. **Transfer Between Accounts** *(Login Required)* – Transfer money within own accounts or to another customer.
 
-## Function Used
+## 🛠 Technologies Used
 
-1. Add New Customer
-2. Withdraw Money from Account (required login)
-3. Deposit Money into Account (required login)
-4. Transfer Money Between Accounts (required login)
+- **Language:** Python 🐍  
+- **Approach:** Object-Oriented Programming (OOP)  
+- **Data Storage:** CSV file
